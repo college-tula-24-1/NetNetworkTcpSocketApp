@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="NetNetworkDictionaryClientApp/NetNetworkDictionaryClientApp.csproj" Id="7e146af0-7738-4bdc-8315-db95113024c5" />
+  <Project Path="NetNetworkDictionaryListenerApp/NetNetworkDictionaryListenerApp.csproj" Id="25480a23-3580-4665-be6e-e16e5b7f89e5" />
   <Project Path="NetNetworkTcpClientApp/NetNetworkTcpClientApp.csproj" Id="9f3f6047-5043-4d3f-ac82-47195f19e310" />
   <Project Path="NetNetworkTcpListenerApp/NetNetworkTcpListenerApp.csproj" Id="867ea0e8-743e-448d-be73-5a2f46c2378f" />
   <Project Path="NetNetworkTcpSocketApp/NetNetworkTcpSocketApp.csproj" />
