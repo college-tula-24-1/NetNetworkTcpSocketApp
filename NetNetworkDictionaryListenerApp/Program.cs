@@ -29,9 +29,13 @@ try
 
         while(true)
         {
-            while((requestPart = stream.ReadByte()) != '\n')
+            requestBuffer.Clear();
+
+            while ((requestPart = stream.ReadByte()) != '\n')
                 requestBuffer.Add((byte)requestPart);
             string word = Encoding.UTF8.GetString(requestBuffer.ToArray());
+
+            Console.WriteLine($"Client sended word {word}");
 
             if (word == "*end*") break;
 
@@ -39,10 +43,14 @@ try
                 response = $"Not found word {word}";
             else 
                 response = dictionary[word];
-            response += "\n";
+            
+            Console.WriteLine($"Server answered {response}");
 
+            response += "\n";
             await stream.WriteAsync(Encoding.UTF8.GetBytes(response));
         }
+
+        client.Close();
     }
 }
 catch(Exception ex)

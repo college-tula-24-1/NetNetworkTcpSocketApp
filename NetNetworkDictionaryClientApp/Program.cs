@@ -8,23 +8,29 @@ using TcpClient client = new();
 await client.ConnectAsync(IPAddress.Loopback, port);
 NetworkStream stream = client.GetStream();
 
-List<byte> response = new();
-string word = "";
-int requestPart = 1;
+using StreamReader reader = new StreamReader(stream);
+using StreamWriter writer = new StreamWriter(stream);
 
-while(true)
+//List<byte> response = new();
+//int requestPart = 1;
+
+string word = "";
+while (true)
 {
     Console.Write("Input word: ");
     word = Console.ReadLine();
 
-    if (word == "*end*") break;
+    //await stream.WriteAsync(Encoding.UTF8.GetBytes(word + "\n"));
+    await writer.WriteLineAsync(word);
+    await writer.FlushAsync();
 
-    await stream.WriteAsync(Encoding.UTF8.GetBytes(word + "\n"));
+    //while ((requestPart = stream.ReadByte()) != '\n')
+    //    response.Add((byte)requestPart);
 
-    while ((requestPart = stream.ReadByte()) != '\n')
-        response.Add((byte)requestPart);
+    string response = await reader.ReadLineAsync();
 
-    Console.WriteLine($"{word}: { Encoding.UTF8.GetString(response.ToArray()) }");
+    Console.WriteLine($"{word}: {response}");
 
-    response.Clear();
+    
+
 }
